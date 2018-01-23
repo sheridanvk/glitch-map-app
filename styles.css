@@ -8,3 +8,11 @@ h1 {
   top: 0; 
   left: 0;
 }
+.marker {
+  background-image: url('https://cdn.glitch.com/9cf2405b-5bb9-4e97-86b3-19f1788db8b8%2Fstar.png?1516714565462');
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}

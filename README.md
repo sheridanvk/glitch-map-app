@@ -1,18 +1,7 @@
-# My cool website
+# Getting your data on a map
 
-This file describes your project to the community. What's your cool website about? What makes it special?
+This Glitch App shows you how to take any set of data points that is tagged with location information (specifically a latitude and longitude) and display it on a MapBox map.
 
-ヽ(๏∀๏ )ﾉ
+## Getting started
 
-## ← index.html
-
-Where you'll write the content of your website. 
-
-## ← styles.css
-
-CSS files add styling rules to your content
-
-## ← script.js
-
-If you're feeling fancy you can add interactivity to your site with Javascript
-
+- Put your data in a CSV (Comma Separated Value) file, and replace 
