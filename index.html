@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/styles.css">
     <script src="/script.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/jquery-csv/src/jquery.csv.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css" rel="stylesheet"/>
     <script src="https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js"></script>
   </head>
@@ -14,11 +16,47 @@
     <div id="map">
     </div>
     <script>
+      // Display a Mapbox map
       mapboxgl.accessToken = 'pk.eyJ1Ijoic2hlcmlkYW4tZ2xpdGNoIiwiYSI6ImNqY3JpanI5YjI5ZjgzM3BnOTVhNDJjY3QifQ.Deejy7IucI8K6SYsXOQv7A';
       
+      // Details on the Mapbox API here: https://www.mapbox.com/mapbox-gl-js/api/#map
       var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/light-v9'
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v9',
+        zoom: 10
+        
+      });
+      
+      var bounds = new mapboxgl.LngLatBounds();
+
+      
+      // Import data from CSV to display as map items
+      $.ajax({
+        type: "GET",
+        url: "https://cdn.glitch.com/9cf2405b-5bb9-4e97-86b3-19f1788db8b8%2Fpoints-of-interest.csv?1516715073438"
+      })
+      .then(function(csv) {
+        var data = $.csv.toObjects(csv);
+        data.forEach(function(listing) {
+          var el = document.createElement('div');
+          el.className = 'marker';
+          
+          var lat = listing.lat;
+          var lng = listing.lng;
+
+          new mapboxgl.Marker(el)
+          .setLngLat([lng, lat])
+          .setPopup(new mapboxgl.Popup()
+            .setHTML(getHTML(listing)))
+          .addTo(map);
+
+          bounds.extend([lng, lat]);
+        });        
+        map.fitBounds(bounds, {
+          linear: true,
+          padding: 50, 
+          maxZoom:14
+        });
       });
     </script>
   </body>
