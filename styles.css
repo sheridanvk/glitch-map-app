@@ -16,3 +16,10 @@ h1 {
   border-radius: 50%;
   cursor: pointer;
 }
+.mapboxgl-popup {
+  max-width: 300px;
+  z-index: 10;
+}
+.mapboxgl-popup-close-button {
+  font-size: 1.6em;
+}
